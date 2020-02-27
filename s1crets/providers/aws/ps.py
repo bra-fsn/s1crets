@@ -8,9 +8,9 @@ from s1crets.providers.aws import ServiceWrapper
 
 @cachetools.cached(cache={})
 class SecretProvider(BaseProvider):
-    def __init__(self, aws_sts_args={}, cache_args={}, **kw):
-        self.ssm = ServiceWrapper('ssm', **aws_sts_args)
-        super().__init__(sts_args=aws_sts_args, cache_args=cache_args)
+    def __init__(self, sts_args={}, cache_args={}, **kw):
+        self.ssm = ServiceWrapper('ssm', **sts_args)
+        super().__init__(sts_args=sts_args, cache_args=cache_args)
 
     def get(self, path, default=DefaultValue, decrypt=True, cached=True):
         try:
