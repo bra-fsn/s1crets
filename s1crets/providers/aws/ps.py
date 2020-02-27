@@ -8,7 +8,7 @@ from s1crets.providers.aws import ServiceWrapper
 
 @cachetools.cached(cache={})
 class SecretProvider(BaseProvider):
-    def __init__(self, sts_args={}, cache_args={}, **kw):
+    def __init__(self, sts_args={}, cache_args={}, **kwargs):
         self.ssm = ServiceWrapper('ssm', **sts_args)
         super().__init__(sts_args=sts_args, cache_args=cache_args)
 
@@ -108,10 +108,10 @@ class SecretProvider(BaseProvider):
             pass
 
         params = {}
-        kw = {}
+        kwargs = {}
         while True:
             r = self.ssm.get_parameters_by_path(Path=path, Recursive=recursive,
-                                                WithDecryption=decrypt, **kw)
+                                                WithDecryption=decrypt, **kwargs)
             for param in r.get('Parameters', []):
                 params[param['Name']] = param['Value']
 
@@ -119,7 +119,7 @@ class SecretProvider(BaseProvider):
                 # we've got all params
                 break
             # set the next token
-            kw['NextToken'] = r['NextToken']
+            kwargs['NextToken'] = r['NextToken']
         self.cache.set('paths', path, params, decrypt, recursive)
         return params
 
@@ -153,8 +153,8 @@ class SecretProvider(BaseProvider):
             raise KeyError('describe_parameters returned other than one ({}) parameters on path {}'.format(
                 len(orig_params), path))
 
-        kw = self.dict_filt(orig_params[0], ('Name', 'Type', 'KeyId', 'Description'))
-        self.ssm.put_parameter(Value=value, Overwrite=True, **kw)
+        kwargs = self.dict_filt(orig_params[0], ('Name', 'Type', 'KeyId', 'Description'))
+        self.ssm.put_parameter(Value=value, Overwrite=True, **kwargs)
 
         # remove path from the key_cache
         try:

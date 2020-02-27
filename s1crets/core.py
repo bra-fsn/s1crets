@@ -29,9 +29,9 @@ def get_provider(provider, **params):
     return m.SecretProvider(**params)
 
 
-def args_cache_key(*args, **kw):
+def args_cache_key(*args, **kwargs):
     args = list(args)
-    for k, v in kw.items():
+    for k, v in kwargs.items():
         if isinstance(v, list):
             v = tuple(v)
         try:
