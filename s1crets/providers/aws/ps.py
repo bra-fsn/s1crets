@@ -13,14 +13,14 @@ class SecretProvider(BaseProvider):
         super().__init__(sts_args=sts_args, cache_args=cache_args)
 
     def get(self, path, default=DefaultValue, decrypt=True, cached=True):
-        try:
-            if cached:
+        if cached:
+            try:
                 # we take decrypt's value into account, so we can store both
                 # encrypted and decrypted data in the cache
                 return self.cache.get('keys', path, decrypt)
-        except KeyError:
-            # not in cache
-            pass
+            except KeyError:
+                # not in cache
+                pass
         if not path.startswith('/aws/reference/secretsmanager/'):
             # if the path references the Parameter Store, just try to fetch
             # the value
