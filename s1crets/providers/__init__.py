@@ -19,7 +19,7 @@ class BaseProvider(object, metaclass=ABCMeta):
         return dict([(i, d[i]) for i in d if i in set(keys)])
 
     @abstractmethod
-    def get(self, path, default=DefaultValue, decrypt=True, cached=True):
+    def get(self, path, keypath=None, default=DefaultValue, decrypt=True, cached=True):
         pass
 
     @abstractmethod
