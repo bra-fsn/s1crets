@@ -30,6 +30,8 @@ def get_provider(provider, **params):
 
 
 def get(provider='aws.sm', path=None, keypath=None):
+    """
+    test"""
     p = get_provider(provider)
     return p.get(path, keypath=keypath)
 
