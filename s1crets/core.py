@@ -30,8 +30,19 @@ def _get_provider(provider, **params):
 
 
 def get(provider='aws.sm', path=None, keypath=None):
+    """Get a secret from the given `provider`
+
+    Args:
+        provider (str): Secret provider, currently supported:
+            aws.sm: AWS Secrets Manager
+            aws.ps: AWS Parameter Store
+        path (str): The path for the given secret
+        keypath (list): the key path for looking into a JSON secret
+
+    Returns:
+        secret: The returned secret, can be string, bytes or in case of JSON,
+                a dictionary
     """
-    test"""
     p = _get_provider(provider)
     return p.get(path, keypath=keypath)
 
