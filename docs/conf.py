@@ -15,6 +15,7 @@
 import os
 import sys
 sys.path.insert(0, os.path.abspath('..'))
+import s1crets
 
 
 # -- Project information -----------------------------------------------------
@@ -24,9 +25,9 @@ copyright = '2020, NAGY, Attila'
 author = 'NAGY, Attila'
 
 # The short X.Y version
-version = ''
+version = s1crets.__version__
 # The full version, including alpha/beta/rc tags
-release = '0.0.1'
+release = s1crets.__version__
 
 
 # -- General configuration ---------------------------------------------------
