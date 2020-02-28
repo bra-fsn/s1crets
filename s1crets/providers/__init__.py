@@ -31,5 +31,5 @@ class BaseProvider(object, metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def path_exist(self, path):
+    def path_exists(self, path, keypath=None, cached=True):
         pass
