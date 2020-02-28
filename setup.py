@@ -19,7 +19,8 @@ setuptools.setup(
     url="https://github.com/bra-fsn/s1crets",
     packages=setuptools.find_packages(),
     scripts=['bin/s1crets'],
-    install_requires=['cachetools', 'click>=7.0', 'boto3>=1.9.61'],
+    install_requires=['cachetools', 'click>=7.0', 'boto3>=1.9.61',
+                      'sphinxcontrib-programoutput'],
     classifiers=[
         "Programming Language :: Python",
         "License :: OSI Approved :: MIT License",
