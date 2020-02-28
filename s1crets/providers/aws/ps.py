@@ -12,7 +12,7 @@ class SecretProvider(BaseProvider):
         self.ssm = ServiceWrapper('ssm', **sts_args)
         super().__init__(sts_args=sts_args, cache_args=cache_args)
 
-    def get(self, path, default=DefaultValue, decrypt=True, cached=True):
+    def get(self, path, default=DefaultValue, decrypt=True, cached=True, **kwargs):
         if cached:
             try:
                 # we take decrypt's value into account, so we can store both
