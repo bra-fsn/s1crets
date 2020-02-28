@@ -158,13 +158,11 @@ class SecretProvider(BaseProvider):
 
         # remove path from the key_cache
         try:
-            with self.lock:
-                self.cache.delete('keys', path)
+            self.cache.delete('keys', path)
         except KeyError:
             pass
         # and simply drop all entries from path_cache
-        with self.lock:
-            self.cache.clear('paths')
+        self.cache.clear('paths')
         return value
 
     def path_exist(self, path):
