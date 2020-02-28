@@ -29,11 +29,21 @@ def get_provider(provider, **params):
     return m.SecretProvider(**params)
 
 
-def get(provider='aws.sm', path=None):
+def get(provider='aws.sm', path=None, keypath=None):
     p = get_provider(provider)
-    return p.get(path)
+    return p.get(path, keypath=keypath)
+
+
+def path_exists(provider='aws.sm', path=None, keypath=None):
+    p = get_provider(provider)
+    return p.path_exists(path, keypath=keypath)
 
 
 def get_by_path(provider='aws.sm', path=None):
     p = get_provider(provider)
     return p.get_by_path(path)
+
+
+def update(provider='aws.sm', path=None, value=None):
+    p = get_provider(provider)
+    return p.update(path, value)
