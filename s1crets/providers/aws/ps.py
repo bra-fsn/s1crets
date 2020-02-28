@@ -165,7 +165,7 @@ class SecretProvider(BaseProvider):
         self.cache.clear('paths')
         return value
 
-    def path_exist(self, path):
+    def path_exists(self, path, **kwargs):
         next_token = None
         is_path_in_parameter_storage = None
         # the loop will stop when the response do not contain NextToken or we got the data
