@@ -29,22 +29,6 @@ def get_provider(provider, **params):
     return m.SecretProvider(**params)
 
 
-def args_cache_key(*args, **kwargs):
-    args = list(args)
-    for k, v in kwargs.items():
-        if isinstance(v, list):
-            v = tuple(v)
-        try:
-            hash(v)
-        except Exception:
-            continue
-        args.append((k, v))
-    return tuple(args)
-
-
-# list is unhashable, so we use only the positional args for the cache key.
-# This means tags have to be specified as a kw arg.
-# @cachetools.cached(cache={}, key=args_cache_key)
 def get(provider='aws.sm', path=None):
     p = get_provider(provider)
     return p.get(path)
