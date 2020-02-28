@@ -166,6 +166,8 @@ class SecretProvider(BaseProvider):
         return value
 
     def path_exists(self, path, **kwargs):
+        # we're using describe_parameters here, so we can check for paths and
+        # exact keys as well
         next_token = None
         is_path_in_parameter_storage = None
         # the loop will stop when the response do not contain NextToken or we got the data
