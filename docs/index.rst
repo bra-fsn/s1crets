@@ -14,6 +14,7 @@ You can install it with `pip install s1crets`.
 Command Line Usage
 ------------------
 Upon successful installation, you should have the `s1crets` command line utility:
+
 .. program-output:: s1crets --help
 .. automodule:: s1crets
     :members:
