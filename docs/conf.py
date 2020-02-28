@@ -14,6 +14,7 @@
 #
 import os
 import sys
+import datetime
 sys.path.insert(0, os.path.abspath('..'))
 import s1crets
 
@@ -21,7 +22,7 @@ import s1crets
 # -- Project information -----------------------------------------------------
 
 project = 's1crets'
-copyright = '2020, NAGY, Attila'
+copyright = f'{datetime.datetime.now().year}, NAGY, Attila'
 author = 'NAGY, Attila'
 
 # The short X.Y version
