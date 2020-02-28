@@ -19,7 +19,7 @@ Upon successful installation, you should have the `s1crets` command line utility
 
 Getting a secret
 ~~~~~~~~~~~~~~~~
-You can get a secret's decyphered value with a simple command like this::
+You can get a secret's deciphered value with a simple command like this::
 
   $ s1crets get --provider aws.sm secrets/test
   test
