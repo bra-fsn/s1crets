@@ -15,6 +15,7 @@ Caching into the memory
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 You can set the cache parameters by submitting the `cache_args`::
+
   import s1crets.providers.aws
   ps = s1crets.providers.aws.ParameterStore(cache_args={'cache_size': 10, 'cache_ttl': 60})
 
@@ -23,6 +24,7 @@ Caching onto disk
 ~~~~~~~~~~~~~~~~~
 
 Instead of keeping the cache in memory, you can persists that to disk with the `diskcache` module::
+
   ps = s1crets.providers.aws.ParameterStore(cache_args={'cache_on_disk':True, 'key_cache_dir': '/data/key_cache', 'path_cache_dir': '/data/path_cache'})
 
 BEWARE that this stores sensitive information unencrypted, you have to take care against malicious access to those files!
@@ -41,6 +43,7 @@ service and corresponding encryption (KMS) keys.
 If your current role doesn't have those, you can switch temporarily to another role by assuming it.
 
 An example for doing that::
+
   import s1crets.providers.aws
   ROLEARN = f'arn:aws:iam::{TARGET_ACCOUNT}:role/my-assume-role'
   ps = s1crets.providers.aws.ParameterStore(sts_args={'RoleArn': ROLEARN, 'RoleSessionName': 'myscript'})
