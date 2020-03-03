@@ -2,10 +2,6 @@ s1crets
 =======
 
 s1crets is a thin Python wrapper to read secrets from cloud resources.
-Currently supported are:
- * `AWS Secrets Manager <https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/secretsmanager.html>`_
- * `AWS Systems Manager's Parameter Store <https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ssm.html>`_
-
 Wherever supported, it can be used to read/update non-encrypted values as well.
 
 Installing
@@ -45,3 +41,6 @@ A Simple Example
     {'level2': 3}
     $ s1crets get secrets/json_test level1 level2
     3
+
+
+.. _pip: https://pip.pypa.io/en/stable/quickstart/
