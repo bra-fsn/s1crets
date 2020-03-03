@@ -1,8 +1,8 @@
 import json
 import cachetools
 from s1crets.core import DictQuery
-from s1crets.providers import BaseProvider, DefaultValue
-from s1crets.providers.aws import ServiceWrapper
+from s1crets.providers.base import BaseProvider, DefaultValue
+from s1crets.providers.aws.base import ServiceWrapper
 
 
 @cachetools.cached(cache={})
