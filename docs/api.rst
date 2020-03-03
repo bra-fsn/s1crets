@@ -56,11 +56,51 @@ Systems Manager Parameter Store
 (PS from now on) provides access to a path-like structured, `/` separated key-value store.
 You can access your parameters on the `AWS SSM PS console <https://console.aws.amazon.com/systems-manager/parameters>`_.
 
-Initialize s1crets
-^^^^^^^^^^^^^^^^^^
+
+Initializing the module
+^^^^^^^^^^^^^^^^^^^^^^^
+
+You can create a Parameter Store object this way::
+
+  import s1crets.providers.aws
+  ps = s1crets.providers.aws.ParameterStore()
+
+Getting a secret
+^^^^^^^^^^^^^^^^
+
+To get a secret::
+
+  ps.get('/common/any/authentication/bingads/careerjob360sem_gmail.com/basic_auth')
+
+This will return a `KeyError` Exception if the key doesn't exist.
+If the value is JSON-decodeable, you'll receive a dictionary.
+
+Listing all secrets below a path
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+PS supports the notion of paths, so you can get all secrets below one::
+
+  ps.get_by_path('/prod/databases/mysql')
+
+This will return a dictionary with the PS keys and their values.
 
 
-import s1crets.providers.aws
+Checking whether a path exists or not
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can check whether a path (and in PS case it means the path or a key) exists::
+
+  ps.path_exists('/prod/databases/mysql')
+
+Returns a boolean.
+
+Updating secrets
+^^^^^^^^^^^^^^^^
+
+It's possible to update values as well. This will use the same `KeyId` as the
+original value::
+
+  ps.update('/prod/databases/mysql/bigdb/root', 'S3cr3Tp4Ssw0Rd!^')
 
 
 s1crets module
