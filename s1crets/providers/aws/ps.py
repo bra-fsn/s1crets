@@ -2,11 +2,11 @@ import json
 import cachetools
 from botocore.exceptions import ClientError
 from s1crets.core import DictQuery
-from s1crets.providers.base import BaseProvider, DefaultValue
+from s1crets.providers.base import BaseProvider, DefaultValue, args_cache_key
 from s1crets.providers.aws.base import ServiceWrapper
 
 
-@cachetools.cached(cache={})
+@cachetools.cached(cache={}, key=args_cache_key)
 class SecretProvider(BaseProvider):
     def __init__(self, sts_args={}, cache_args={}, **kwargs):
         self.ssm = ServiceWrapper('ssm', **sts_args)
