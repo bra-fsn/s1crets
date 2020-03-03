@@ -6,6 +6,7 @@ Currently supported are:
  * `AWS Secrets Manager <https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/secretsmanager.html>`_
  * `AWS Systems Manager's Parameter Store <https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ssm.html>`_
 
+Wherever supported, it can be used to read/update non-encrypted values as well.
 
 Installation
 ------------
