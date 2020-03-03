@@ -11,6 +11,8 @@ Installation
 ------------
 You can install it with `pip install s1crets`.
 
+User's guide
+------------
 
 .. toctree::
    :maxdepth: 2
