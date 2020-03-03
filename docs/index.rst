@@ -15,7 +15,7 @@ User's guide
 ------------
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 4
 
    cli
    api
