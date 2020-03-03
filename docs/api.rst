@@ -70,7 +70,7 @@ Getting a secret
 
 To get a secret::
 
-  ps.get('/common/any/authentication/bingads/careerjob360sem_gmail.com/basic_auth')
+  ps.get('/prod/databases/mysql/bigdb/root')
 
 This will return a `KeyError` Exception if the key doesn't exist.
 If the value is JSON-decodeable, you'll receive a dictionary.
@@ -101,6 +101,57 @@ It's possible to update values as well. This will use the same `KeyId` as the
 original value::
 
   ps.update('/prod/databases/mysql/bigdb/root', 'S3cr3Tp4Ssw0Rd!^')
+
+
+Secrets Manager
+~~~~~~~~~~~~~~~
+
+`AWS Secrets Manager <https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/secretsmanager.html>`_
+(SM from now on) provides access to a key-value encrypted store.
+You can access your secrets on the `AWS SM console <https://console.aws.amazon.com/secretsmanager/home>`_.
+
+SM can store arbitrary values (even binary), but if you use the console, they will mostly be JSONs.
+s1crets automatically tries to parse JSON, so you'll get a parsed result.
+
+
+Initializing the module
+^^^^^^^^^^^^^^^^^^^^^^^
+
+You can create a Secrets Manager object this way::
+
+  import s1crets.providers.aws
+  sm = s1crets.providers.aws.SecretsManager()
+
+Getting a secret
+^^^^^^^^^^^^^^^^
+
+To get a secret::
+
+  sm.get('prod/databases/mysql/bigdb/root')
+
+This will return a `KeyError` Exception if the key doesn't exist.
+If the value is JSON-decodeable, you'll receive a dictionary.
+
+
+Checking whether a key exists or not
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can check whether a key exists::
+
+  sm.path_exists('prod/databases/mysql')
+
+Returns a boolean.
+
+Note that SM doesn't support the notion of path, so you can only check for exact key names.
+
+Updating secrets
+^^^^^^^^^^^^^^^^
+
+It's possible to update values as well. This will use the same encryption key as the
+original value::
+
+  sm.update('prod/databases/mysql/bigdb/root', 'S3cr3Tp4Ssw0Rd!^')
+
 
 
 s1crets module
