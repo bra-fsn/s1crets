@@ -2,7 +2,7 @@ import io
 import re
 import setuptools
 
-with io.open("README.md", "rt", encoding="utf8") as f:
+with io.open("README.rst", "rt", encoding="utf8") as f:
     long_description = f.read()
 
 with io.open("s1crets/__init__.py", "rt", encoding="utf8") as f:
@@ -15,7 +15,6 @@ setuptools.setup(
     author_email="nagy.attila@gmail.com",
     description="Convenience wrapper for AWS Parameter Store/Secrets Manager",
     long_description=long_description,
-    long_description_content_type="text/markdown",
     url="https://github.com/bra-fsn/s1crets",
     packages=setuptools.find_packages(),
     scripts=['bin/s1crets'],
@@ -25,4 +24,8 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
+    project_urls={
+        "Documentation": "https://s1crets.readthedocs.io/en/latest/index.html",
+        "Issue tracker": "https://github.com/bra-fsn/s1crets/issues"
+    }
 )
