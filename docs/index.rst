@@ -22,12 +22,12 @@ Getting a secret
 You can get a secret's deciphered value with a simple command like this::
 
   $ s1crets get --provider aws.sm secrets/test
-  test
+  secret_value
 
 You can use a different provider (for example AWS Parameter Store)::
 
-$ s1crets get --provider aws.ps /secrets/test
-test
+  $ s1crets get --provider aws.ps /secrets/test
+  secret_value
 
 JSON contents in secrets are supported. You can query into the document itself::
 
