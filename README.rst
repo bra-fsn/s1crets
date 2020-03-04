@@ -46,4 +46,7 @@ A Simple Example
     3
 
 
+This library is developed and used internally at `System1
+<https://system1.com/>`_
+
 .. _pip: https://pip.pypa.io/en/stable/quickstart/
