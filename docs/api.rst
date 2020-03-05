@@ -32,6 +32,24 @@ Using diskcache can solve cache persistency (for eg. between script executions) 
 instances.
 
 
+Simple API
+----------
+
+If you are fine without submitting custom parameters like for caching and assuming a role etc, you can
+just use the simple API::
+
+  import s1crets
+  s1crets.get('aws.sm', 'prod/databases/mysql/bigdb/root')
+  s1crets.path_exists('aws.sm', 'prod/databases/mysql/bigdb/root')
+  etc.
+
+Because the provider class itself is cached, you will get default caching with this::
+
+  >>> s1crets.get
+  <function get at 0x7f3f1a0dd2f0>
+  >>> s1crets.get
+  <function get at 0x7f3f1a0dd2f0>
+
 AWS
 ---
 
