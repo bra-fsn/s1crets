@@ -4,6 +4,9 @@ s1crets
 s1crets is a thin Python wrapper to read secrets from cloud resources.
 Wherever supported, it can be used to read/update non-encrypted values as well.
 
+You can find its documentation at `readthedocs.io
+<https://s1crets.readthedocs.io/en/latest/>`_
+
 Installing
 ----------
 
@@ -42,5 +45,8 @@ A Simple Example
     $ s1crets get secrets/json_test level1 level2
     3
 
+
+This library is developed and used internally at `System1
+<https://system1.com/>`_
 
 .. _pip: https://pip.pypa.io/en/stable/quickstart/
