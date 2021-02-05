@@ -67,6 +67,16 @@ An example for doing that::
   ps = s1crets.providers.aws.ParameterStore(sts_args={'RoleArn': ROLEARN, 'RoleSessionName': 'myscript'})
 
 
+Setting a region
+~~~~~~~~~~~~~~~~
+
+You can set the region manually::
+
+  import s1crets.providers.aws
+  ps = s1crets.providers.aws.ParameterStore(sts_args={'aws_region':'us-east-1'})
+  sm = s1crets.providers.aws.SecretsManager(sts_args={'aws_region':'us-east-1'})
+
+
 Systems Manager Parameter Store
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
