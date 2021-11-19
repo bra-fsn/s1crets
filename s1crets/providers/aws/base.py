@@ -33,8 +33,9 @@ class ServiceWrapper(object):
 
     def __init__(self, service, RoleArn=None, RoleSessionName='s1crets',
                  DurationSeconds=3600, aws_region=None,
-                 boto_config=Config(connect_timeout=60, read_timeout=60,
+                 boto_config=Config(connect_timeout=2, read_timeout=2,
                                     retries={'total_max_attempts': 3})
+                 ):
         self.service = service
         self.RoleArn = RoleArn
         self.DurationSeconds = DurationSeconds
