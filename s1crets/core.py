@@ -43,7 +43,7 @@ def docstring_parameter(sub):
 
 
 @docstring_parameter(DOCSTRINGS)
-def get(provider='aws.sm', path=None, keypath=None):
+def get(provider='aws.sm', path=None, keypath=None, retry=None, timeout=None):
     """Get a secret from the given `provider`
 
     Args:
@@ -54,12 +54,12 @@ def get(provider='aws.sm', path=None, keypath=None):
     Returns:
         secret: The returned secret, can be string, bytes or in case of JSON, a dictionary
     """
-    p = _get_provider(provider)
+    p = _get_provider(provider, retry=retry, timeout=timeout)
     return p.get(path, keypath=keypath)
 
 
 @docstring_parameter(DOCSTRINGS)
-def path_exists(provider='aws.sm', path=None, keypath=None):
+def path_exists(provider='aws.sm', path=None, keypath=None, retry=None, timeout=None):
     """Check whether the path exists in the secrets provider
 
     Args:
@@ -70,12 +70,12 @@ def path_exists(provider='aws.sm', path=None, keypath=None):
     Returns:
         secret: The returned secret, can be string, bytes or in case of JSON, a dictionary
     """
-    p = _get_provider(provider)
+    p = _get_provider(provider, retry=retry, timeout=timeout)
     return p.path_exists(path, keypath=keypath)
 
 
 @docstring_parameter(DOCSTRINGS)
-def get_by_path(provider='aws.sm', path=None):
+def get_by_path(provider='aws.sm', path=None, retry=None, timeout=None):
     """Returns all secrets beneath a path (if the provider supports it)
 
     Args:
@@ -85,12 +85,12 @@ def get_by_path(provider='aws.sm', path=None):
     Returns:
         secrets (list): List of returned secrets
     """
-    p = _get_provider(provider)
+    p = _get_provider(provider, retry=retry, timeout=timeout)
     return p.get_by_path(path)
 
 
 @docstring_parameter(DOCSTRINGS)
-def update(provider='aws.sm', path=None, value=None):
+def update(provider='aws.sm', path=None, value=None, retry=None, timeout=None):
     """Updates secret with given value
 
     Args:
@@ -102,5 +102,5 @@ def update(provider='aws.sm', path=None, value=None):
         None
     """
 
-    p = _get_provider(provider)
+    p = _get_provider(provider, retry=retry, timeout=timeout)
     return p.update(path, value)

@@ -1,5 +1,6 @@
 import json
 import cachetools
+from botocore.client import Config
 from s1crets.core import DictQuery
 from s1crets.providers.base import BaseProvider, DefaultValue, args_cache_key
 from s1crets.providers.aws.base import ServiceWrapper
@@ -7,8 +8,14 @@ from s1crets.providers.aws.base import ServiceWrapper
 
 @cachetools.cached(cache={}, key=args_cache_key)
 class SecretProvider(BaseProvider):
-    def __init__(self, sts_args={}, cache_args={}, **kwargs):
-        self.sm = ServiceWrapper('secretsmanager', **sts_args)
+    def __init__(self, sts_args={}, cache_args={}, retry=None, timeout=None, **kwargs):
+        retries = None
+        if retry:
+            retries = {'total_max_attempts': retry}
+        config = Config(connect_timeout=timeout, read_timeout=timeout,
+                        retries=retries)
+        self.sm = ServiceWrapper('secretsmanager', boto_config=config, **sts_args)
+        
         super().__init__(sts_args=sts_args, cache_args=cache_args)
 
     def _get_secret_value(self, secret, path, keypath=None, default=DefaultValue):

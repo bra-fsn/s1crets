@@ -26,6 +26,7 @@ class DefaultValue(object):
 class BaseProvider(object, metaclass=ABCMeta):
     def __init__(self, cache_args={}, **kwargs):
         self.cache = Cache(**cache_args)
+        self.kwargs = kwargs
 
     @staticmethod
     def dict_filt(d, keys):
@@ -33,17 +34,19 @@ class BaseProvider(object, metaclass=ABCMeta):
         return dict([(i, d[i]) for i in d if i in set(keys)])
 
     @abstractmethod
-    def get(self, path, keypath=None, default=DefaultValue, decrypt=True, cached=True):
+    def get(self, path, keypath=None, default=DefaultValue, decrypt=True, cached=True,
+            retry=None, timeout=None):
         pass
 
     @abstractmethod
-    def get_by_path(self, path, decrypt=True, recursive=True, cached=True):
+    def get_by_path(self, path, decrypt=True, recursive=True, cached=True,
+                    retry=None, timeout=None):
         pass
 
     @abstractmethod
-    def update(self, path, value):
+    def update(self, path, value, retry=None, timeout=None):
         pass
 
     @abstractmethod
-    def path_exists(self, path, keypath=None, cached=True):
+    def path_exists(self, path, keypath=None, cached=True, retry=None, timeout=None):
         pass

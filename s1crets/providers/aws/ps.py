@@ -1,5 +1,6 @@
 import json
 import cachetools
+from botocore.client import Config
 from botocore.exceptions import ClientError
 from s1crets.core import DictQuery
 from s1crets.providers.base import BaseProvider, DefaultValue, args_cache_key
@@ -8,8 +9,10 @@ from s1crets.providers.aws.base import ServiceWrapper
 
 @cachetools.cached(cache={}, key=args_cache_key)
 class SecretProvider(BaseProvider):
-    def __init__(self, sts_args={}, cache_args={}, **kwargs):
-        self.ssm = ServiceWrapper('ssm', **sts_args)
+    def __init__(self, sts_args={}, cache_args={}, retry=None, timeout=None, **kwargs):
+        config = Config(connect_timeout=timeout, read_timeout=timeout,
+                        retries={'total_max_attempts': retry})
+        self.ssm = ServiceWrapper('ssm', boto_config=config, **sts_args)
         super().__init__(sts_args=sts_args, cache_args=cache_args)
 
     def get(self, path, default=DefaultValue, decrypt=True, cached=True, **kwargs):
