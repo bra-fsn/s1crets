@@ -43,7 +43,7 @@ def docstring_parameter(sub):
 
 
 @docstring_parameter(DOCSTRINGS)
-def get(provider='aws.sm', path=None, keypath=None, retry=None, timeout=None):
+def get(provider='aws.sm', path=None, keypath=None, retry=3, timeout=5):
     """Get a secret from the given `provider`
 
     Args:
@@ -59,7 +59,7 @@ def get(provider='aws.sm', path=None, keypath=None, retry=None, timeout=None):
 
 
 @docstring_parameter(DOCSTRINGS)
-def path_exists(provider='aws.sm', path=None, keypath=None, retry=None, timeout=None):
+def path_exists(provider='aws.sm', path=None, keypath=None, retry=3, timeout=5):
     """Check whether the path exists in the secrets provider
 
     Args:
@@ -75,7 +75,7 @@ def path_exists(provider='aws.sm', path=None, keypath=None, retry=None, timeout=
 
 
 @docstring_parameter(DOCSTRINGS)
-def get_by_path(provider='aws.sm', path=None, retry=None, timeout=None):
+def get_by_path(provider='aws.sm', path=None, retry=3, timeout=5):
     """Returns all secrets beneath a path (if the provider supports it)
 
     Args:
@@ -90,7 +90,7 @@ def get_by_path(provider='aws.sm', path=None, retry=None, timeout=None):
 
 
 @docstring_parameter(DOCSTRINGS)
-def update(provider='aws.sm', path=None, value=None, retry=None, timeout=None):
+def update(provider='aws.sm', path=None, value=None, retry=3, timeout=5):
     """Updates secret with given value
 
     Args:
