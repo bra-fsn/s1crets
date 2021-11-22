@@ -8,12 +8,9 @@ from s1crets.providers.aws.base import ServiceWrapper
 
 @cachetools.cached(cache={}, key=args_cache_key)
 class SecretProvider(BaseProvider):
-    def __init__(self, sts_args={}, cache_args={}, retry=None, timeout=None, **kwargs):
-        retries = None
-        if retry:
-            retries = {'total_max_attempts': retry}
+    def __init__(self, sts_args={}, cache_args={}, retry=3, timeout=5, **kwargs):
         config = Config(connect_timeout=timeout, read_timeout=timeout,
-                        retries=retries)
+                        retries={'total_max_attempts': retry})
         self.sm = ServiceWrapper('secretsmanager', boto_config=config, **sts_args)
         
         super().__init__(sts_args=sts_args, cache_args=cache_args)
