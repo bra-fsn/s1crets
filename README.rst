@@ -46,6 +46,15 @@ A Simple Example
     3
 
 
+Getting secrets from a different (than configured) region:
+
+.. code-block:: python
+
+    import s1crets.providers.aws
+    sm = s1crets.providers.aws.SecretsManager(sts_args={"aws_region": "us-east-1"})
+    sm.get("secret-from-us-east-1")
+
+
 This library is developed and used internally at `System1
 <https://system1.com/>`_
 
