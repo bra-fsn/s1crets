@@ -1,19 +1,12 @@
 from abc import ABCMeta, abstractmethod
 from s1crets.cache import Cache
+import hashlib
+import cloudpickle
 
 
 # try to make a hashable key for caching
 def args_cache_key(*args, **kw):
-    args = list(args)
-    for k, v in kw.items():
-        if isinstance(v, list):
-            v = tuple(v)
-        try:
-            hash(v)
-        except Exception:
-            continue
-        args.append((k, v))
-    return tuple(args)
+    return hashlib.sha256(cloudpickle.dumps([args, kw])).digest()
 
 
 class DefaultValue(object):
