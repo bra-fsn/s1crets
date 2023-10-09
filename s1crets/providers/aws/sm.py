@@ -51,9 +51,25 @@ class SecretProvider(BaseProvider):
 
         return self._get_secret_value(res, path, keypath, default)
 
-    def get_by_path(*args, **kwargs):
-        # Secrets Manager doesn't support the concept of paths
-        raise NotImplementedError
+    def get_by_path(self, path, cached=True, **kwargs):
+        secrets = {}
+        kwargs = {}
+        while True:
+            r = self.sm.list_secrets(
+                Filters=[{'Key': 'name', 'Values': [path]}],
+                **kwargs
+            )
+            for s in r.get('SecretList', []):
+                secrets[s['Name']] = None
+
+            if 'NextToken' not in r or r['NextToken'] is None:
+                # we've got all secrets
+                break
+            # set the next token
+            kwargs['NextToken'] = r['NextToken']
+        for k in secrets.keys():
+            secrets[k] = self.get(k, cached=True, **kwargs)
+        return secrets
 
     def update(self, path, value):
         # get the current secret in order to see its type
