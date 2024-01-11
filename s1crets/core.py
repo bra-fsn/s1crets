@@ -75,7 +75,7 @@ def path_exists(provider='aws.sm', path=None, keypath=None, retry=3, timeout=5):
 
 
 @docstring_parameter(DOCSTRINGS)
-def get_by_path(provider='aws.sm', path=None, retry=3, timeout=5):
+def get_by_path(provider='aws.sm', path=None, retry=3, timeout=5, fail_on_error=True):
     """Returns all secrets beneath a path (if the provider supports it)
 
     Args:
@@ -85,7 +85,7 @@ def get_by_path(provider='aws.sm', path=None, retry=3, timeout=5):
     Returns:
         secrets (list): List of returned secrets
     """
-    p = _get_provider(provider, retry=retry, timeout=timeout)
+    p = _get_provider(provider, retry=retry, timeout=timeout, fail_on_error=fail_on_error)
     return p.get_by_path(path)
 
 

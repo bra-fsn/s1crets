@@ -1,3 +1,4 @@
+import botocore
 import json
 import cachetools
 from botocore.client import Config
@@ -51,7 +52,7 @@ class SecretProvider(BaseProvider):
 
         return self._get_secret_value(res, path, keypath, default)
 
-    def get_by_path(self, path, cached=True, **kwargs):
+    def get_by_path(self, path, cached=True, fail_on_error=True, **kwargs):
         secrets = {}
         kwargs = {}
         while True:
@@ -68,7 +69,11 @@ class SecretProvider(BaseProvider):
             # set the next token
             kwargs['NextToken'] = r['NextToken']
         for k in secrets.keys():
-            secrets[k] = self.get(k, cached=True, **kwargs)
+            try:
+                secrets[k] = self.get(k, cached=True, **kwargs)
+            except botocore.exceptions.ClientError:
+                if fail_on_error:
+                    raise
         return secrets
 
     def update(self, path, value):

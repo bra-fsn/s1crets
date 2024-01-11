@@ -33,7 +33,7 @@ class BaseProvider(object, metaclass=ABCMeta):
 
     @abstractmethod
     def get_by_path(self, path, decrypt=True, recursive=True, cached=True,
-                    retry=None, timeout=None):
+                    retry=None, timeout=None, fail_on_error=True):
         pass
 
     @abstractmethod

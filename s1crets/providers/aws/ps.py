@@ -102,7 +102,7 @@ class SecretProvider(BaseProvider):
                 self.cache.set('keys', path, val, decrypt)
             return val
 
-    def get_by_path(self, path, decrypt=True, recursive=True, cached=True):
+    def get_by_path(self, path, decrypt=True, recursive=True, cached=True, **kw):
         try:
             if cached:
                 return self.cache.get('paths', path, decrypt, recursive)
